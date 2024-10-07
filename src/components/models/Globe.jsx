@@ -5,18 +5,28 @@ License: CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 Source: https://sketchfab.com/3d-models/earth-globe-98d2b04d46474bafb4250cc75dc583b3
 Title: Earth Globe 🌍
 */
+"use client";
+import React, { useRef } from "react";
+import { useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
 
-import React, { useRef } from 'react'
-import { useGLTF } from '@react-three/drei'
+const Globe = React.memo(function Globe(props) {
+  // Use React.memo for performance optimization
+  const { nodes, materials } = useGLTF("/models/globe-transformed.glb");
 
-export function Model(props) {
-  const { nodes, materials } = useGLTF('/models/Globe-transformed.glb')
+  const modelRef = useRef()
+  useFrame((state, delta) => {
+    modelRef.current.rotation.y = Math.PI / 2 + Math.sin(state.clock.elapsedTime)
+  })
+  
+
   return (
     <group {...props} 
     dispose={null}
       ref={modelRef}
-      position={[0, -1.5, 0]}
-      scale={[0.06, 0.06, 0.06]}
+      position={[-0.05, 1.5, 0]}
+      scale={[0.15, 0.15, 0.15]}
+      rotation={[0.75, 0, 0]}
       >
       <mesh
         castShadow
@@ -43,7 +53,7 @@ export function Model(props) {
         rotation={[-Math.PI / 2, 0.462, Math.PI]}
       />
     </group>
-  )
-}
-
-useGLTF.preload('/models/Globe-transformed.glb')
+  );
+});
+export default Globe;
+useGLTF.preload('/models/globe-transformed.glb');

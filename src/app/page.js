@@ -5,7 +5,7 @@ import RenderModel from "@/components/RenderModel";
 import Navigation from "@/components/navigation";
 
 import dynamic from "next/dynamic";
-const Wizard = dynamic(() => import("@/components/models/Wizard"), {
+const Globe = dynamic(() => import("@/components/models/Globe"), {
   ssr: false,
 });
 
@@ -24,7 +24,7 @@ export default function Home() {
       <div className="w-full h-screen">
         <Navigation />
         <RenderModel>
-          <Wizard />
+          <Globe />
         </RenderModel>
       </div>
     </main>
