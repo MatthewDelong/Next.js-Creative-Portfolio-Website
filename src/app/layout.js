@@ -29,6 +29,9 @@ export default function RootLayout({ children }) {
           "bg-background text-foreground font-inter"
         )}
       >
+        {children}
+        <Sound />
+        <div id="my-modal" />
       </body>
     </html>
   );
